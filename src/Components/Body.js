@@ -18,7 +18,7 @@ export default class Body extends Component{
           <View style={styles.card}>
            
             <View style={styles.cardWithImage}>
-              <Image source={require('../img/vento.png')}/>
+              <Image source={require('../img/wind.png')}/>
               <Text style={styles.textCard}>{this.props.windSpeed}</Text>
             </View>
            
@@ -29,7 +29,7 @@ export default class Body extends Component{
           <View style={styles.card}>
            
             <View style={styles.cardWithImage}>
-              <Image source={require('../img/umidade.png')}/>
+              <Image source={require('../img/drop.png')}/>
               <Text style={styles.textCard}>{this.props.umidade} %</Text>
             </View>
            
@@ -40,7 +40,7 @@ export default class Body extends Component{
           <View style={styles.card}>
            
             <View style={styles.cardWithImage}>
-              <Image source={require('../img/chuva.png')}/>
+              <Image source={require('../img/rainWhite.png')}/>
               <Text style={styles.textCard}>{this.props.percentRainToday} %</Text>
             </View>
            
@@ -51,11 +51,11 @@ export default class Body extends Component{
           <View style={styles.card}>
            
             <View style={styles.cardWithImage}>
-              <Image source={require('../img/olho.png')}/>
+              <Image source={require('../img/eye.png')}/>
               <Text style={styles.textCard}>{this.props.visibilidade} km</Text>
             </View>
            
-            <Text style={styles.textCard}>Visibilidade</Text>
+            <Text style={styles.textCard}>Nebulosidade</Text>
         
           </View>
 
@@ -102,7 +102,7 @@ export default class Body extends Component{
 
             <View style={styles.dayWeek}>
               <Text style={styles.textWeek}>{this.props.sexta ? "Hoje" : "Sexta-Feira"}</Text>
-              <Image source={require('../img/rain.png')}/>
+              <Image source={require('../img/rain.png')} style={styles.alignICon}/>
               <Text style={styles.percentRain}>{this.props.percentRainSex}%</Text>
               <Image source={require('../img/cloud-sun.png')}/>
               <Image source={require('../img/cloud-night.png')}/>
@@ -112,7 +112,7 @@ export default class Body extends Component{
 
             <View style={styles.dayWeek}>
               <Text style={styles.textWeek}>{this.props.sabado ? "Hoje" : "Sábado"}</Text>
-              <Image source={require('../img/rain.png')}/>
+              <Image source={require('../img/rain.png')} style={styles.alignICon}/>
               <Text style={styles.percentRain}>{this.props.percentRainSab}%</Text>
               <Image source={require('../img/cloud-sun.png')}/>
               <Image source={require('../img/cloud-night.png')}/>
@@ -122,9 +122,9 @@ export default class Body extends Component{
 
             <View style={styles.dayWeek}>
               <Text style={styles.textWeek}>{this.props.domingo ? "Hoje" : "Domingo"} </Text>
-              <Image source={require('../img/rain.png')} />
+              <Image source={require('../img/rain.png')} style={styles.alignIConDomingo}/>
               <Text style={styles.percentRain}>{this.props.percentRainDomingo}%</Text>
-              <Image source={require('../img/cloud-sun.png')}/>
+              <Image source={require('../img/cloud-sun.png')} />
               <Image source={require('../img/cloud-night.png')}/>
               <Text style={styles.temp}>{this.props.tempMaxDomingo}°C</Text>
               <Text style={styles.temp}>{this.props.tempMinDomingo}°C</Text>

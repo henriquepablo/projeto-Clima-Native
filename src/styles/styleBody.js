@@ -56,7 +56,7 @@ const styleBody = StyleSheet.create({
 
     dayWeek: {
         flexDirection: 'row',
-        gap: 15,
+        gap: 10,
         backgroundColor: '#fff',
         height: 41,
         width: 342,
@@ -69,9 +69,9 @@ const styleBody = StyleSheet.create({
     },
 
     textWeek: {
-        width: 95,
+        width: 100,
         fontFamily: 'Roboto-Bold',
-        color: '#000'
+        color: '#000',
     },
 
     percentRain: {
@@ -82,7 +82,16 @@ const styleBody = StyleSheet.create({
     temp: {
         fontFamily: 'Roboto-Bold',
         color: '#000',
+    },
+
+    alignICon: {
+        marginRight: 15
+    },
+
+    alignIConDomingo: {
+        marginRight: 6
     }
+    
 });
 
 export default styleBody;
