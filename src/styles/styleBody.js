@@ -90,6 +90,12 @@ const styleBody = StyleSheet.create({
 
     alignIConDomingo: {
         marginRight: 6
+    },
+
+    loading: {
+        height: 700,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
     
 });

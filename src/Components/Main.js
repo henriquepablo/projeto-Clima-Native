@@ -1,10 +1,12 @@
 import React, { Component, useState } from "react";
-import {Text, View, Image } from "react-native";
+import {Text, View, Image, ActivityIndicator } from "react-native";
 
 import styles from "../styles/styleBody";
 import DayWeek from "./DayWeek";
 import Header from "./Header";
 
+
+let pathImage = '';
 export default class Main extends Component{
   
   constructor(props) {
@@ -25,7 +27,8 @@ export default class Main extends Component{
       percentRainToday: 0,
       cloudiness: 0,
       city: '',
-      hour: 0
+      hour: 0,
+      loading: true
     }
   }
 
@@ -33,6 +36,10 @@ export default class Main extends Component{
     fetch("https://api.hgbrasil.com/weather?key=4eae4c2d")
     .then(response => response.json())
     .then(json => {
+      
+      if (json.results.currently == "noite") {
+        pathImage = require('../img/noite_limpa.png');
+      }
 
         const nextdays = json.results.forecast;
         
@@ -45,7 +52,7 @@ export default class Main extends Component{
         this.setState({cloudiness: json.results.cloudiness});
         this.setState({city: json.results.city_name});
         this.setState({hour: json.results.time});
-
+        
         for (let i = 0; i < 7; i++) {
           if (nextdays[i].weekday == "Seg") {
             this.setState({segunda: {
@@ -83,127 +90,144 @@ export default class Main extends Component{
             }});
           }
         }
+
+        this.setState({loading: false});
         
       });
-  }
-  componentDidMount() {
-    this.loadInfoClima();
-  }
+    }
+
+    componentDidMount() {
+      this.loadInfoClima();
+    }
+
   render() {
-    return(
-      <View>
 
-        <Header city={this.state.city} hour={this.state.hour}/>
+    if (this.state.loading) {
+      return(
+        <View style={styles.loading}>
+          <ActivityIndicator size='large' color='#000' />
+          <Text>Carregando Informações</Text>
+        </View>
+      ); 
+    }
 
-
-      <View style={styles.containerBody}>
-        <Image source={require('../img/sol.png')} />
-
-        <Text style={styles.textTemperatura}>{this.state.temp}°C</Text>
-
-        <Text style={styles.descriptionDay}>{this.state.description}</Text>
-
-        <View style={styles.viewCardBody}>
+    else {
+      return(
+        <View>
           
-          <View style={styles.card}>
-           
-            <View style={styles.cardWithImage}>
-              <Image source={require('../img/wind.png')}/>
-              <Text style={styles.textCard}>{this.state.windSpeed}</Text>
-            </View>
-           
-            <Text style={styles.textCard}>Vel. do Vento</Text>
-        
-          </View>
+          <Header city={this.state.city} hour={this.state.hour}/>
 
-          <View style={styles.card}>
-           
-            <View style={styles.cardWithImage}>
-              <Image source={require('../img/drop.png')}/>
-              <Text style={styles.textCard}>{this.state.humidity} %</Text>
-            </View>
-           
-            <Text style={styles.textCard}>Umidade</Text>
-        
-          </View>
 
-          <View style={styles.card}>
-           
-            <View style={styles.cardWithImage}>
-              <Image source={require('../img/rainWhite.png')}/>
-              <Text style={styles.textCard}>{this.state.percentRainToday} %</Text>
-            </View>
-           
-            <Text style={styles.textCard}>% de chuva</Text>
-        
-          </View>
+        <View style={styles.containerBody}>
+          
+          <Image source={pathImage} />
 
-          <View style={styles.card}>
-           
-            <View style={styles.cardWithImage}>
-              <Image source={require('../img/eye.png')}/>
-              <Text style={styles.textCard}>{this.state.cloudiness} km</Text>
-            </View>
-           
-            <Text style={styles.textCard}>Nebulosidade</Text>
-        
-          </View>
+          <Text style={styles.textTemperatura}>{this.state.temp}°C</Text>
 
-          <View style={styles.viewNextDays}>
-            <DayWeek 
-              weekday={this.state.segunda.day == this.state.today ? "Hoje": "Segunda-Feira"} 
-              percentRain = {this.state.segunda.rain}
-              tempMax={this.state.segunda.max}
-              tempMin={this.state.segunda.min}
-              />
+          <Text style={styles.descriptionDay}>{this.state.description}</Text>
 
-            <DayWeek 
-              weekday={this.state.terca.day == this.state.today ? "Hoje": "Terça-Feira"} 
-              percentRain = {this.state.terca.rain}
-              tempMax={this.state.terca.max}
-              tempMin={this.state.terca.min}
-              />
-
-            <DayWeek 
-              weekday={this.state.quarta.day == this.state.today ? "Hoje": "Quarta-Feira"} 
-              percentRain = {this.state.quarta.rain}
-              tempMax={this.state.quarta.max}
-              tempMin={this.state.quarta.min}
-              />
-
-            <DayWeek 
-              weekday={this.state.quinta.day == this.state.today ? "Hoje": "Quinta-Feira"} 
-              percentRain = {this.state.quinta.rain}
-              tempMax={this.state.quinta.max}
-              tempMin={this.state.quinta.min}
-              />
-
-            <DayWeek 
-              weekday={this.state.sexta.day == this.state.today ? "Hoje": "Sexta-Feira"} 
-              percentRain = {this.state.sexta.rain}
-              tempMax={this.state.sexta.max}
-              tempMin={this.state.sexta.min}
-              />
-
-            <DayWeek 
-              weekday={this.state.sabado.day == this.state.today ? "Hoje": "Sábado"} 
-              percentRain = {this.state.sabado.rain}
-              tempMax={this.state.sabado.max}
-              tempMin={this.state.sabado.min}
-              />
+          <View style={styles.viewCardBody}>
             
-            <DayWeek 
-              weekday={this.state.domingo.day == this.state.today ? "Hoje": "Domingo"} 
-              percentRain = {this.state.domingo.rain}
-              tempMax={this.state.domingo.max}
-              tempMin={this.state.domingo.min}
-              />
+            <View style={styles.card}>
+            
+              <View style={styles.cardWithImage}>
+                <Image source={require('../img/wind.png')}/>
+                <Text style={styles.textCard}>{this.state.windSpeed}</Text>
+              </View>
+            
+              <Text style={styles.textCard}>Vel. do Vento</Text>
+          
+            </View>
+
+            <View style={styles.card}>
+            
+              <View style={styles.cardWithImage}>
+                <Image source={require('../img/drop.png')}/>
+                <Text style={styles.textCard}>{this.state.humidity} %</Text>
+              </View>
+            
+              <Text style={styles.textCard}>Umidade</Text>
+          
+            </View>
+
+            <View style={styles.card}>
+            
+              <View style={styles.cardWithImage}>
+                <Image source={require('../img/rainWhite.png')}/>
+                <Text style={styles.textCard}>{this.state.percentRainToday} %</Text>
+              </View>
+            
+              <Text style={styles.textCard}>% de chuva</Text>
+          
+            </View>
+
+            <View style={styles.card}>
+            
+              <View style={styles.cardWithImage}>
+                <Image source={require('../img/eye.png')}/>
+                <Text style={styles.textCard}>{this.state.cloudiness} km</Text>
+              </View>
+            
+              <Text style={styles.textCard}>Nebulosidade</Text>
+          
+            </View>
+
+            <View style={styles.viewNextDays}>
+              <DayWeek 
+                weekday={this.state.segunda.day == this.state.today ? "Hoje": "Segunda-Feira"} 
+                percentRain = {this.state.segunda.rain}
+                tempMax={this.state.segunda.max}
+                tempMin={this.state.segunda.min}
+                />
+
+              <DayWeek 
+                weekday={this.state.terca.day == this.state.today ? "Hoje": "Terça-Feira"} 
+                percentRain = {this.state.terca.rain}
+                tempMax={this.state.terca.max}
+                tempMin={this.state.terca.min}
+                />
+
+              <DayWeek 
+                weekday={this.state.quarta.day == this.state.today ? "Hoje": "Quarta-Feira"} 
+                percentRain = {this.state.quarta.rain}
+                tempMax={this.state.quarta.max}
+                tempMin={this.state.quarta.min}
+                />
+
+              <DayWeek 
+                weekday={this.state.quinta.day == this.state.today ? "Hoje": "Quinta-Feira"} 
+                percentRain = {this.state.quinta.rain}
+                tempMax={this.state.quinta.max}
+                tempMin={this.state.quinta.min}
+                />
+
+              <DayWeek 
+                weekday={this.state.sexta.day == this.state.today ? "Hoje": "Sexta-Feira"} 
+                percentRain = {this.state.sexta.rain}
+                tempMax={this.state.sexta.max}
+                tempMin={this.state.sexta.min}
+                />
+
+              <DayWeek 
+                weekday={this.state.sabado.day == this.state.today ? "Hoje": "Sábado"} 
+                percentRain = {this.state.sabado.rain}
+                tempMax={this.state.sabado.max}
+                tempMin={this.state.sabado.min}
+                />
+              
+              <DayWeek 
+                weekday={this.state.domingo.day == this.state.today ? "Hoje": "Domingo"} 
+                percentRain = {this.state.domingo.rain}
+                tempMax={this.state.domingo.max}
+                tempMin={this.state.domingo.min}
+                />
+            </View>
+          
           </View>
-        
         </View>
       </View>
-    </View>
-    );
+      );
+    }
   }
 }
 
