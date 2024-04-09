@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
-import styles from '../styles/styleBody';
+import styles from '../styles/styleMain';
 
 export default class DayWeek extends Component {
     render() {

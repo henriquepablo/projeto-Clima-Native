@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
-import styleBody from "../styles/styleBody";
+import styleBody from "../styles/styleMain";
 
 export default class Loading extends Component {
     render() {

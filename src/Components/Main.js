@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import {Text, View, Image, ActivityIndicator } from "react-native";
 
-import styles from "../styles/styleBody";
+import styles from "../styles/styleMain";
 import DayWeek from "./DayWeek";
 import Header from "./Header";
 import Loading from "./Loading";
