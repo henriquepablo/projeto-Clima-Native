@@ -93,7 +93,7 @@ const styleBody = StyleSheet.create({
     },
 
     loading: {
-        height: 700,
+        height: 650,
         justifyContent: 'center',
         alignItems: 'center'
     }

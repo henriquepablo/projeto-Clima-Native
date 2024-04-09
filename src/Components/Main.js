@@ -4,6 +4,7 @@ import {Text, View, Image, ActivityIndicator } from "react-native";
 import styles from "../styles/styleBody";
 import DayWeek from "./DayWeek";
 import Header from "./Header";
+import Loading from "./Loading";
 
 
 let pathImage = '';
@@ -104,10 +105,7 @@ export default class Main extends Component{
 
     if (this.state.loading) {
       return(
-        <View style={styles.loading}>
-          <ActivityIndicator size='large' color='#000' />
-          <Text>Carregando Informações</Text>
-        </View>
+        <Loading />
       ); 
     }
 
