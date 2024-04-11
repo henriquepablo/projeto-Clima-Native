@@ -38,10 +38,22 @@ export default class Main extends Component{
     .then(response => response.json())
     .then(json => {
       
-      if (json.results.currently == "noite") {
+      if (json.results.currently == "noite" && json.results.condition_slug == "clear_night") {
         pathImage = require('../img/noite_limpa.png');
       }
-
+      else if (json.results.currently == "dia" && json.results.condition_slug == "clear_day") {
+        pathImage = require('../img/clear_day.png');
+      }
+      else if (json.results.currently == "dia" && json.results.condition_slug == "fog") {
+        pathImage = require('../img/cloudiness.png');
+      }
+      else if (json.results.currently == "tarde" && json.results.condition_slug == "fog") {
+        pathImage = require('../img/cloudiness.png');
+      }
+      else if (json.results.currently == "noite" && json.results.condition_slug == "fog") {
+        pathImage = require('../img/cloudiness.png');
+      }
+      
         const nextdays = json.results.forecast;
         
         this.setState({today: json.results.forecast[0].weekday});
@@ -155,7 +167,7 @@ export default class Main extends Component{
                 <Text style={styles.textCard}>{this.state.percentRainToday} %</Text>
               </View>
             
-              <Text style={styles.textCard}>% de chuva</Text>
+              <Text style={styles.textCard}> de chuva</Text>
           
             </View>
 
