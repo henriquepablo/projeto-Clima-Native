@@ -44,66 +44,66 @@ export default class Main extends Component{
       else if (json.results.currently == "dia" && json.results.condition_slug == "clear_day") {
         pathImage = require('../img/clear_day.png');
       }
-      else if (json.results.currently == "dia" && json.results.condition_slug == "fog") {
+      else if (json.results.currently == "dia" && json.results.condition_slug == "fog" || json.results.currently == "dia" && json.results.condition_slug == "cloudly_night") {
         pathImage = require('../img/cloudiness.png');
       }
-      else if (json.results.currently == "tarde" && json.results.condition_slug == "fog") {
+      else if (json.results.currently == "tarde" && json.results.condition_slug == "fog" || json.results.currently == "tarde" && json.results.condition_slug == "cloudly_night") {
         pathImage = require('../img/cloudiness.png');
       }
-      else if (json.results.currently == "noite" && json.results.condition_slug == "fog") {
+      else if (json.results.currently == "noite" && json.results.condition_slug == "fog" || json.results.currently == "noite" && json.results.condition_slug == "cloudly_night") {
         pathImage = require('../img/cloudiness.png');
       }
       
-        const nextdays = json.results.forecast;
-        
-        this.setState({today: json.results.forecast[0].weekday});
-        this.setState({temp: json.results.temp});
-        this.setState({description: json.results.description});
-        this.setState({windSpeed: json.results.wind_speedy});
-        this.setState({humidity: json.results.humidity});
-        this.setState({percentRainToday: json.results.forecast[0].rain_probability});
-        this.setState({cloudiness: json.results.cloudiness});
-        this.setState({city: json.results.city_name});
-        this.setState({hour: json.results.time});
-        
-        for (let i = 0; i < 7; i++) {
-          if (nextdays[i].weekday == "Seg") {
-            this.setState({segunda: {
-              ...this.state.segunda, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
-          else if (nextdays[i].weekday == "Ter") {
-            this.setState({terca: {
-              ...this.state.terca, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
-          else if (nextdays[i].weekday == "Qua") {
-            this.setState({quarta: {
-              ...this.state.quarta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
-          else if (nextdays[i].weekday == "Qui") {
-            this.setState({quinta: {
-              ...this.state.quinta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
-          else if (nextdays[i].weekday == "Sex") {
-            this.setState({sexta: {
-              ...this.state.sexta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
-          else if (nextdays[i].weekday == "Sáb") {
-            this.setState({sabado: {
-              ...this.state.sabado, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
-          else if (nextdays[i].weekday == "Dom") {
-            this.setState({domingo: {
-              ...this.state.domingo, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-            }});
-          }
+      const nextdays = json.results.forecast;
+      
+      this.setState({today: json.results.forecast[0].weekday});
+      this.setState({temp: json.results.temp});
+      this.setState({description: json.results.description});
+      this.setState({windSpeed: json.results.wind_speedy});
+      this.setState({humidity: json.results.humidity});
+      this.setState({percentRainToday: json.results.forecast[0].rain_probability});
+      this.setState({cloudiness: json.results.cloudiness});
+      this.setState({city: json.results.city_name});
+      this.setState({hour: json.results.time});
+      
+      for (let i = 0; i < 7; i++) {
+        if (nextdays[i].weekday == "Seg") {
+          this.setState({segunda: {
+            ...this.state.segunda, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
         }
-
+        else if (nextdays[i].weekday == "Ter") {
+          this.setState({terca: {
+            ...this.state.terca, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
+        }
+        else if (nextdays[i].weekday == "Qua") {
+          this.setState({quarta: {
+            ...this.state.quarta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
+        }
+        else if (nextdays[i].weekday == "Qui") {
+          this.setState({quinta: {
+            ...this.state.quinta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
+        }
+        else if (nextdays[i].weekday == "Sex") {
+          this.setState({sexta: {
+            ...this.state.sexta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
+        }
+        else if (nextdays[i].weekday == "Sáb") {
+          this.setState({sabado: {
+            ...this.state.sabado, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
+        }
+        else if (nextdays[i].weekday == "Dom") {
+          this.setState({domingo: {
+            ...this.state.domingo, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
+          }});
+        }
+      }
+      
         this.setState({loading: false});
         
       });
