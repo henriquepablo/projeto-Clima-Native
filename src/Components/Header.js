@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Image, Text, TextInput, View } from "react-native";
 import styles from "../styles/styleHeader";
 
-export default class Header extends Component {
-  render() {
+export default function Header(props) {
     return (
       <View style={styles.containerHeader}>
       
@@ -14,11 +13,10 @@ export default class Header extends Component {
 
         <View style={styles.viewLocationHeader}>
           <Image source={require('../img/map-pin.png')} style={styles.imgMapHeader}/>
-          <Text style={styles.textHeader}>{this.props.city} </Text>
+          <Text style={styles.textHeader}>{props.city} </Text>
         </View>
 
-        <Text style={styles.textHeader}>Última atualização às {this.props.hour}</Text>
+        <Text style={styles.textHeader}>Última atualização às {props.hour}</Text>
       </View>
     )
-  }
 };
