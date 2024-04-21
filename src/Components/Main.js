@@ -1,121 +1,98 @@
-import React, { Component, useState } from "react";
-import {Text, View, Image, ActivityIndicator } from "react-native";
+import React, {useState, useContext, useEffect } from "react";
+import {Text, View, Image} from "react-native";
 
 import styles from "../styles/styleMain";
 import DayWeek from "./DayWeek";
 import Header from "./Header";
 import Loading from "./Loading";
-
+import MyContext from "./Context";
 
 let pathImage = '';
-export default class Main extends Component{
+export default function Main(props){
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      segunda: {day: '', max: 0, min: 0, rain: 0},
-      terca: {day: '', max: 0, min: 0, rain: 0},
-      quarta: {day: '', max: 0, min: 0, rain: 0},
-      quinta: {day: '', max: 0, min: 0, rain: 0},
-      sexta: {day: '', max: 0, min: 0, rain: 0},
-      sabado: {day: '', max: 0, min: 0, rain: 0},
-      domingo: {day: '', max: 0, min: 0, rain: 0},
-      today: '',
-      temp: 0,
-      description: '',
-      windSpeed: '',
-      humidity: 0,
-      percentRainToday: 0,
-      cloudiness: 0,
-      city: '',
-      hour: 0,
-      loading: true
-    }
-  }
+  const {cityName} = useContext(MyContext);
+  const [segunda, setSegunda] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [terca, setTerca] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [quarta, setQuarta] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [quinta, setQuinta] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [sexta, setSexta] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [sabado, setSabado] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [domingo, setDomingo] = useState({day: '', max: 0, min: 0, rain: 0});
+  const [today, setToday] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [temp, setTemp] = useState(0);
+  const [description, setDescription] = useState('');
+  const [windSpeed, setWindSpeed] = useState(0);
+  const [humidity, setHumidity] = useState(0);
+  const [percentRainToday, setPercentRainToday] = useState(0);
+  const [cloudiness, setCloudiness] = useState(0);
+  const [city, setCity] = useState('');
+  const [hour, setHour] = useState('');
 
-  loadInfoClima = () => {
-    fetch("https://api.hgbrasil.com/weather?key=4eae4c2d")
-    .then(response => response.json())
-    .then(json => {
-      
-      if (json.results.currently == "noite" && json.results.condition_slug == "clear_night") {
-        pathImage = require('../img/noite_limpa.png');
-      }
-      else if (json.results.currently == "dia" && json.results.condition_slug == "clear_day") {
-        pathImage = require('../img/clear_day.png');
-      }
-      else if (json.results.currently == "dia" && json.results.condition_slug == "fog" || json.results.currently == "dia" && json.results.condition_slug == "cloudly_night") {
-        pathImage = require('../img/cloudiness.png');
-      }
-      else if (json.results.currently == "tarde" && json.results.condition_slug == "fog" || json.results.currently == "tarde" && json.results.condition_slug == "cloudly_night") {
-        pathImage = require('../img/cloudiness.png');
-      }
-      else if (json.results.currently == "noite" && json.results.condition_slug == "fog" || json.results.currently == "noite" && json.results.condition_slug == "cloudly_night") {
-        pathImage = require('../img/cloudiness.png');
-      }
-      
-      const nextdays = json.results.forecast;
-      
-      this.setState({today: json.results.forecast[0].weekday});
-      this.setState({temp: json.results.temp});
-      this.setState({description: json.results.description});
-      this.setState({windSpeed: json.results.wind_speedy});
-      this.setState({humidity: json.results.humidity});
-      this.setState({percentRainToday: json.results.forecast[0].rain_probability});
-      this.setState({cloudiness: json.results.cloudiness});
-      this.setState({city: json.results.city_name});
-      this.setState({hour: json.results.time});
-      
-      for (let i = 0; i < 7; i++) {
-        if (nextdays[i].weekday == "Seg") {
-          this.setState({segunda: {
-            ...this.state.segunda, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-        else if (nextdays[i].weekday == "Ter") {
-          this.setState({terca: {
-            ...this.state.terca, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-        else if (nextdays[i].weekday == "Qua") {
-          this.setState({quarta: {
-            ...this.state.quarta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-        else if (nextdays[i].weekday == "Qui") {
-          this.setState({quinta: {
-            ...this.state.quinta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-        else if (nextdays[i].weekday == "Sex") {
-          this.setState({sexta: {
-            ...this.state.sexta, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-        else if (nextdays[i].weekday == "Sáb") {
-          this.setState({sabado: {
-            ...this.state.sabado, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-        else if (nextdays[i].weekday == "Dom") {
-          this.setState({domingo: {
-            ...this.state.domingo, day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability
-          }});
-        }
-      }
-      
-        this.setState({loading: false});
+  useEffect(() => {
+      fetch(`https://api.hgbrasil.com/weather?key=4eae4c2d`)
+      .then(response => response.json())
+      .then(json => {
         
-      });
-    }
+        if (json.results.currently == "noite" && json.results.condition_slug == "clear_night") {
+          pathImage = require('../img/noite_limpa.png');
+        }
+        else if (json.results.currently == "dia" && json.results.condition_slug == "clear_day") {
+          pathImage = require('../img/clear_day.png');
+        }
+        else if (json.results.currently == "dia" && json.results.condition_slug == "fog" || json.results.currently == "dia" && json.results.condition_slug == "cloudly_night") {
+          pathImage = require('../img/cloudiness.png');
+        }
+        else if (json.results.currently == "tarde" && json.results.condition_slug == "fog" || json.results.currently == "tarde" && json.results.condition_slug == "cloudly_night") {
+          pathImage = require('../img/cloudiness.png');
+        }
+        else if (json.results.currently == "noite" && json.results.condition_slug == "fog" || json.results.currently == "noite" && json.results.condition_slug == "cloudly_night") {
+          pathImage = require('../img/cloudiness.png');
+        }
+        
+        const nextdays = json.results.forecast;
+        
+        setToday(json.results.forecast[0].weekday);
 
-    componentDidMount() {
-      this.loadInfoClima();
-    }
+        setTemp(json.results.temp);
+        setDescription(json.results.description);
+        setWindSpeed(json.results.wind_speedy);
+        setHumidity(json.results.humidity);
+        setPercentRainToday(json.results.forecast[0].rain_probability);
+        setCloudiness(json.results.cloudiness);
+        setCity(json.results.city_name);
+        setHour(json.results.time);
+        
+        for (let i = 0; i < 7; i++) {
+          if (nextdays[i].weekday == "Seg") {
+            setSegunda({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});
+          }
+           else if (nextdays[i].weekday == "Ter") {
+            setTerca({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});
+          }
+           else if (nextdays[i].weekday == "Qua") {
+            setQuarta({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});
+          }
+          else if (nextdays[i].weekday == "Qui") {
+            setQuinta({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});;
+          }
+          else if (nextdays[i].weekday == "Sex") {
+            setSexta({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});;
+          }
+          else if (nextdays[i].weekday == "Sáb") {
+            setSabado({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});
+          }
+          else if (nextdays[i].weekday == "Dom") {
+            setDomingo({day: nextdays[i].weekday, max: nextdays[i].max, min: nextdays[i].min, rain: nextdays[i].rain_probability});
+          }
+        }
+        
+          setLoading(false);
+          console.log(cityName)
+        });
+  }, [cityName]);
 
-  render() {
-
-    if (this.state.loading) {
+    if (loading) {
       return(
         <Loading />
       ); 
@@ -125,16 +102,16 @@ export default class Main extends Component{
       return(
         <View>
           
-          <Header city={this.state.city} hour={this.state.hour}/>
+          <Header city={city} hour={hour}/>
 
 
         <View style={styles.containerBody}>
           
           <Image source={pathImage} />
 
-          <Text style={styles.textTemperatura}>{this.state.temp}°C</Text>
+          <Text style={styles.textTemperatura}>{temp}°C</Text>
 
-          <Text style={styles.descriptionDay}>{this.state.description}</Text>
+          <Text style={styles.descriptionDay}>{description}</Text>
 
           <View style={styles.viewCardBody}>
             
@@ -142,7 +119,7 @@ export default class Main extends Component{
             
               <View style={styles.cardWithImage}>
                 <Image source={require('../img/wind.png')}/>
-                <Text style={styles.textCard}>{this.state.windSpeed}</Text>
+                <Text style={styles.textCard}>{windSpeed}</Text>
               </View>
             
               <Text style={styles.textCard}>Vel. do Vento</Text>
@@ -153,7 +130,7 @@ export default class Main extends Component{
             
               <View style={styles.cardWithImage}>
                 <Image source={require('../img/drop.png')}/>
-                <Text style={styles.textCard}>{this.state.humidity} %</Text>
+                <Text style={styles.textCard}>{humidity} %</Text>
               </View>
             
               <Text style={styles.textCard}>Umidade</Text>
@@ -164,7 +141,7 @@ export default class Main extends Component{
             
               <View style={styles.cardWithImage}>
                 <Image source={require('../img/rainWhite.png')}/>
-                <Text style={styles.textCard}>{this.state.percentRainToday} %</Text>
+                <Text style={styles.textCard}>{percentRainToday} %</Text>
               </View>
             
               <Text style={styles.textCard}> de chuva</Text>
@@ -175,7 +152,7 @@ export default class Main extends Component{
             
               <View style={styles.cardWithImage}>
                 <Image source={require('../img/eye.png')}/>
-                <Text style={styles.textCard}>{this.state.cloudiness} km</Text>
+                <Text style={styles.textCard}>{cloudiness} km</Text>
               </View>
             
               <Text style={styles.textCard}>Nebulosidade</Text>
@@ -184,53 +161,53 @@ export default class Main extends Component{
 
             <View style={styles.viewNextDays}>
               <DayWeek 
-                weekday={this.state.segunda.day == this.state.today ? "Hoje": "Segunda-Feira"} 
-                percentRain = {this.state.segunda.rain}
-                tempMax={this.state.segunda.max}
-                tempMin={this.state.segunda.min}
+                weekday={segunda.day == today ? "Hoje": "Segunda-Feira"} 
+                percentRain = {segunda.rain}
+                tempMax={segunda.max}
+                tempMin={segunda.min}
                 />
 
               <DayWeek 
-                weekday={this.state.terca.day == this.state.today ? "Hoje": "Terça-Feira"} 
-                percentRain = {this.state.terca.rain}
-                tempMax={this.state.terca.max}
-                tempMin={this.state.terca.min}
+                weekday={terca.day == today ? "Hoje": "Terça-Feira"} 
+                percentRain = {terca.rain}
+                tempMax={terca.max}
+                tempMin={terca.min}
                 />
 
               <DayWeek 
-                weekday={this.state.quarta.day == this.state.today ? "Hoje": "Quarta-Feira"} 
-                percentRain = {this.state.quarta.rain}
-                tempMax={this.state.quarta.max}
-                tempMin={this.state.quarta.min}
+                weekday={quarta.day == today ? "Hoje": "Quarta-Feira"} 
+                percentRain = {quarta.rain}
+                tempMax={quarta.max}
+                tempMin={quarta.min}
                 />
 
               <DayWeek 
-                weekday={this.state.quinta.day == this.state.today ? "Hoje": "Quinta-Feira"} 
-                percentRain = {this.state.quinta.rain}
-                tempMax={this.state.quinta.max}
-                tempMin={this.state.quinta.min}
+                weekday={quinta.day == today ? "Hoje": "Quinta-Feira"} 
+                percentRain = {quinta.rain}
+                tempMax={quinta.max}
+                tempMin={quinta.min}
                 />
 
               <DayWeek 
-                weekday={this.state.sexta.day == this.state.today ? "Hoje": "Sexta-Feira"} 
-                percentRain = {this.state.sexta.rain}
-                tempMax={this.state.sexta.max}
-                tempMin={this.state.sexta.min}
+                weekday={sexta.day == today ? "Hoje": "Sexta-Feira"} 
+                percentRain = {sexta.rain}
+                tempMax={sexta.max}
+                tempMin={sexta.min}
                 />
 
               <DayWeek 
-                weekday={this.state.sabado.day == this.state.today ? "Hoje": "Sábado"} 
-                percentRain = {this.state.sabado.rain}
-                tempMax={this.state.sabado.max}
-                tempMin={this.state.sabado.min}
+                weekday={sabado.day == today ? "Hoje": "Sábado"} 
+                percentRain = {sabado.rain}
+                tempMax={sabado.max}
+                tempMin={sabado.min}
                 />
               
               <DayWeek 
-                weekday={this.state.domingo.day == this.state.today ? "Hoje": "Domingo"} 
-                percentRain = {this.state.domingo.rain}
-                tempMax={this.state.domingo.max}
-                tempMin={this.state.domingo.min}
-                />
+                weekday={domingo.day == today ? "Hoje": "Domingo"} 
+                percentRain = {domingo.rain}
+                tempMax={domingo.max}
+                tempMin={domingo.min}
+                /> 
             </View>
           
           </View>
@@ -238,6 +215,5 @@ export default class Main extends Component{
       </View>
       );
     }
-  }
 }
 
