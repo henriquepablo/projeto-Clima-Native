@@ -30,7 +30,7 @@ export default function Main(props){
   const [hour, setHour] = useState('');
 
   useEffect(() => {
-      fetch(`https://api.hgbrasil.com/weather?key=4eae4c2d`)
+      fetch(`https://api.hgbrasil.com/weather?key=2b97e02e&city_name=${cityName}`)
       .then(response => response.json())
       .then(json => {
         
