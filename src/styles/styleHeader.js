@@ -18,6 +18,7 @@ const styleHeader = StyleSheet.create({
         marginTop: 40,
         borderRadius: 10,
         padding: 10,
+        paddingLeft: 30,
         fontFamily: 'Lato-Medium',
         fontSize: 16,
         shadowColor: '#000',
@@ -36,6 +37,12 @@ const styleHeader = StyleSheet.create({
         color: '#fff',
         fontSize: 17,
         fontFamily: 'Roboto-Regular',
+    },
+
+    imgSearch: {
+        position: 'absolute',
+        left: 30,
+        top: 58,
     }
 });
 

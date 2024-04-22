@@ -17,6 +17,8 @@ export default function Header(props) {
           onSubmitEditing={text => setCityName(text.nativeEvent.text)}
         />
 
+        <Image source={require('../img/search.png')}style={styles.imgSearch}/>
+        
         <View style={styles.viewLocationHeader}>
           <Image source={require('../img/map-pin.png')} style={styles.imgMapHeader}/>
           <Text style={styles.textHeader}>{props.city} </Text>
