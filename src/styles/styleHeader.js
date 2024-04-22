@@ -43,6 +43,12 @@ const styleHeader = StyleSheet.create({
         position: 'absolute',
         left: 30,
         top: 58,
+    },
+
+    imgCircleX: {
+       position: 'absolute',
+       right: 30,
+       top: 58, 
     }
 });
 

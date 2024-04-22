@@ -19,6 +19,9 @@ export default function Header(props) {
 
         <Image source={require('../img/search.png')}style={styles.imgSearch}/>
         
+        <Image source={require('../img/circle-x.png')} style={styles.imgCircleX}/>
+
+
         <View style={styles.viewLocationHeader}>
           <Image source={require('../img/map-pin.png')} style={styles.imgMapHeader}/>
           <Text style={styles.textHeader}>{props.city} </Text>
