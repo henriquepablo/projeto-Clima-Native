@@ -1,11 +1,12 @@
 import React, {useState, useContext, useEffect } from "react";
-import {Text, View, Image} from "react-native";
+import {Text, View, Image, ScrollView} from "react-native";
 
 import styles from "../styles/styleMain";
 import DayWeek from "./DayWeek";
 import Header from "./Header";
 import Loading from "./Loading";
 import MyContext from "./Context";
+import LinearGradient from "react-native-linear-gradient";
 
 let pathImage = '';
 export default function Main(props){
@@ -101,7 +102,8 @@ export default function Main(props){
     else {
       return(
         <View>
-          
+          <LinearGradient colors={['#5CBCDB', '#0096C7', '#0054B6', '#01377C']} start={{x:0.5, y:0}}>
+          <ScrollView>
           <Header city={city} hour={hour}/>
 
 
@@ -212,6 +214,8 @@ export default function Main(props){
           
           </View>
         </View>
+        </ScrollView>
+        </LinearGradient>
       </View>
       );
     }
