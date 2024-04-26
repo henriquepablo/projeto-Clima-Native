@@ -15,7 +15,16 @@ const App = () =>{
      return(
       <MyContext.Provider value={{cityName, setCityName}}>    
         <NavigationContainer >
-          <Tab.Navigator initialRouteName="Main">
+          <Tab.Navigator initialRouteName="Main" 
+
+              screenOptions={{headerShown: false, tabBarShowLabel: false, 
+              tabBarStyle: {
+                borderRadius: 8,
+                position: 'absolute',
+                left: 10,
+                right: 10,
+                bottom: 10,
+              }}} >
             <Tab.Screen name="Main" component={Main} />
             <Tab.Screen name="News" component={News} />
           </Tab.Navigator>
