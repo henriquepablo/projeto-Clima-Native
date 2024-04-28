@@ -7,7 +7,9 @@ const styleNews = StyleSheet.create({
         margin: 10,
         borderRadius: 15,
         height: 230,
-        width: 375
+        width: 375,
+        justifyContent: 'center',
+        alignSelf: 'center'
     },
 
     newsHeader: {
