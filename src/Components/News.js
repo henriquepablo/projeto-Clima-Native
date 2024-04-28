@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Linking, ScrollView, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import styleNews from "../styles/styleNews";
 
 const News = () => {
 
@@ -23,15 +24,24 @@ const News = () => {
     }, []); 
     
     return (
-        <View style={{flex: 1}}>
-            <ScrollView>
-            
+        <View>
+            <ScrollView>  
                 <LinearGradient colors={['#5CBCDB', '#0096C7', '#0054B6', '#01377C']} start={{x:0.5, y:0}} style={{flex: 1}}>
             
                     {newsItens.map((item, index) => (
-                        <View key={index} style={{borderColor: '#000', borderStyle: 'dashed', borderWidth: 1}}>
-                            <Text>{item.titulo}</Text>
-                            <Text>{item.introducao}</Text>
+                        <View key={index} style={styleNews.container} >
+                            
+                            <View style={styleNews.newsHeader}>
+                                <Text style={styleNews.titulo}>{item.titulo}</Text>
+                                <Text style={styleNews.dataPublicacao}>{item.data_publicacao}</Text>
+                            </View>
+                            
+                            <Text style={styleNews.introducao}>{item.introducao}</Text>
+                            
+                            <Text style={styleNews.link} onPress={() => {
+                                Linking.openURL(item.link)
+                            }}>Leia a notícia completa</Text>
+                        
                         </View>
                     ))}
 
