@@ -6,8 +6,8 @@ export default function Loading(props) {
     
         return(
             <View style={styleBody.loading}> 
-                <ActivityIndicator size='large' color='#fff' />
-                <Text style={{color: "#fff"}}>Carregando Informações</Text>
+                <ActivityIndicator size='large' color='#000' />
+                <Text style={{color: "#000"}}>Carregando Informações</Text>
             </View>
         );
     
