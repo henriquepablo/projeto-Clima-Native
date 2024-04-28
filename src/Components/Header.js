@@ -3,6 +3,7 @@ import { Image, Text, TextInput, View } from "react-native";
 import styles from "../styles/styleHeader";
 import { useContext } from "react";
 import MyContext from "./Context";
+import styleHeader from "../styles/styleHeader";
 
 export default function Header(props) {
 
@@ -15,11 +16,14 @@ export default function Header(props) {
           placeholder="Pesquisar Local" 
           style={styles.input}
           onSubmitEditing={text => setCityName(text.nativeEvent.text)}
+          
         />
 
-        <Image source={require('../img/search.png')}style={styles.imgSearch}/>
+        <View style={styleHeader.viewIconSearchCircle}>
+          <Image source={require('../img/search.png')}/>
+          <Image source={require('../img/circle-x.png')} />
+        </View>
         
-        <Image source={require('../img/circle-x.png')} style={styles.imgCircleX}/>
 
 
         <View style={styles.viewLocationHeader}>

@@ -39,16 +39,11 @@ const styleHeader = StyleSheet.create({
         fontFamily: 'Roboto-Regular',
     },
 
-    imgSearch: {
-        position: 'absolute',
-        left: 30,
-        top: 58,
-    },
-
-    imgCircleX: {
-       position: 'absolute',
-       right: 30,
-       top: 58, 
+    viewIconSearchCircle: {
+        justifyContent: 'space-between', 
+        flexDirection: 'row',  
+        width: 330, 
+        marginTop: -33
     }
 });
 
