@@ -52,9 +52,12 @@ const App = () =>{
                       <Image source={require('../img/jornal-dobrado.png')} style={{tintColor: '#fff', padding: 10}}/>
                     </View>
                   );
+                  
                 }
                 return <Image source={require('../img/jornal-dobrado.png')} style={{tintColor: '#000', padding: 10}}/>
-              }
+              },
+              tabBarBadge: 50,
+              tabBarBadgeStyle: {backgroundColor: '#000'}
             }}  
           />
 
