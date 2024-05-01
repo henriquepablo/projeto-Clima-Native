@@ -48,7 +48,6 @@ const styleBody = StyleSheet.create({
     },
 
     viewNextDays: {
-        borderWidth: 1,
         borderRadius: 10,
         height: 410,
         margin: 40,
@@ -67,6 +66,13 @@ const styleBody = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
     },
+
+    dropShadow: {
+        shadowColor: '#000', 
+        shadowOffset: {width: 6, height: 10}, 
+        shadowOpacity: 0.5, 
+        shadowRadius: 2
+    },  
 
     textWeek: {
         width: 100,
