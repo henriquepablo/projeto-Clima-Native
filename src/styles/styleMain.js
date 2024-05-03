@@ -26,27 +26,6 @@ const styleBody = StyleSheet.create({
         flexWrap: 'wrap'
     },
 
-    card: {
-        width: 150,
-        height: 96,
-        borderWidth: 1,
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    cardWithImage: {
-        flexDirection: 'row',
-        gap: 10,
-        marginBottom: 5
-    },
-
-    textCard: {
-        color: '#fff',
-        fontSize: 16,
-        fontFamily: 'Lato-Regular'
-    },
-
     viewNextDays: {
         borderRadius: 10,
         height: 410,

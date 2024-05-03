@@ -7,6 +7,7 @@ import Header from "./Header";
 import Loading from "./Loading";
 import MyContext from "./Context";
 import LinearGradient from "react-native-linear-gradient";
+import Card from "./Card";
 
 let pathImage = '';
 export default function Main(props){
@@ -116,103 +117,66 @@ export default function Main(props){
           <Text style={styles.descriptionDay}>{description}</Text>
 
           <View style={styles.viewCardBody}>
-            
-            <View style={styles.card}>
-            
-              <View style={styles.cardWithImage}>
-                <Image source={require('../img/wind.png')}/>
-                <Text style={styles.textCard}>{windSpeed}</Text>
-              </View>
-            
-              <Text style={styles.textCard}>Vel. do Vento</Text>
-          
-            </View>
+            <Card pathImg={require('../img/wind.png')} textInfo={windSpeed} info={''} textName={'Vel. do Vento'}/> 
 
-            <View style={styles.card}>
-            
-              <View style={styles.cardWithImage}>
-                <Image source={require('../img/drop.png')}/>
-                <Text style={styles.textCard}>{humidity} %</Text>
-              </View>
-            
-              <Text style={styles.textCard}>Umidade</Text>
-          
-            </View>
+            <Card pathImg={require('../img/drop.png')} textInfo={humidity} info={'%'} textName={'Humidade'}/>
 
-            <View style={styles.card}>
-            
-              <View style={styles.cardWithImage}>
-                <Image source={require('../img/rainWhite.png')}/>
-                <Text style={styles.textCard}>{percentRainToday} %</Text>
-              </View>
-            
-              <Text style={styles.textCard}> de chuva</Text>
-          
-            </View>
+            <Card pathImg={require('../img/rainWhite.png')} textInfo={percentRainToday} info={'%'} textName={'De chuva'}/>
 
-            <View style={styles.card}>
-            
-              <View style={styles.cardWithImage}>
-                <Image source={require('../img/eye.png')}/>
-                <Text style={styles.textCard}>{cloudiness} km</Text>
-              </View>
-            
-              <Text style={styles.textCard}>Nebulosidade</Text>
-          
-            </View>
-
-            <View style={styles.viewNextDays}>
-              <DayWeek 
-                weekday={segunda.day == today ? "Hoje": "Segunda-Feira"} 
-                percentRain = {segunda.rain}
-                tempMax={segunda.max}
-                tempMin={segunda.min}
-                />
-
-              <DayWeek 
-                weekday={terca.day == today ? "Hoje": "Terça-Feira"} 
-                percentRain = {terca.rain}
-                tempMax={terca.max}
-                tempMin={terca.min}
-                />
-
-              <DayWeek 
-                weekday={quarta.day == today ? "Hoje": "Quarta-Feira"} 
-                percentRain = {quarta.rain}
-                tempMax={quarta.max}
-                tempMin={quarta.min}
-                />
-
-              <DayWeek 
-                weekday={quinta.day == today ? "Hoje": "Quinta-Feira"} 
-                percentRain = {quinta.rain}
-                tempMax={quinta.max}
-                tempMin={quinta.min}
-                />
-
-              <DayWeek 
-                weekday={sexta.day == today ? "Hoje": "Sexta-Feira"} 
-                percentRain = {sexta.rain}
-                tempMax={sexta.max}
-                tempMin={sexta.min}
-                />
-
-              <DayWeek 
-                weekday={sabado.day == today ? "Hoje": "Sábado"} 
-                percentRain = {sabado.rain}
-                tempMax={sabado.max}
-                tempMin={sabado.min}
-                />
-              
-              <DayWeek 
-                weekday={domingo.day == today ? "Hoje": "Domingo"} 
-                percentRain = {domingo.rain}
-                tempMax={domingo.max}
-                tempMin={domingo.min}
-                /> 
-            </View>
-          
+            <Card pathImg={require('../img/eye.png')} textInfo={cloudiness} info={'km'} textName={'Nebulosidade'}/>
           </View>
+            
+          <View style={styles.viewNextDays}>
+            <DayWeek 
+              weekday={segunda.day == today ? "Hoje": "Segunda-Feira"} 
+              percentRain = {segunda.rain}
+              tempMax={segunda.max}
+              tempMin={segunda.min}
+              />
+
+            <DayWeek 
+              weekday={terca.day == today ? "Hoje": "Terça-Feira"} 
+              percentRain = {terca.rain}
+              tempMax={terca.max}
+              tempMin={terca.min}
+              />
+
+            <DayWeek 
+              weekday={quarta.day == today ? "Hoje": "Quarta-Feira"} 
+              percentRain = {quarta.rain}
+              tempMax={quarta.max}
+              tempMin={quarta.min}
+              />
+
+            <DayWeek 
+              weekday={quinta.day == today ? "Hoje": "Quinta-Feira"} 
+              percentRain = {quinta.rain}
+              tempMax={quinta.max}
+              tempMin={quinta.min}
+              />
+
+            <DayWeek 
+              weekday={sexta.day == today ? "Hoje": "Sexta-Feira"} 
+              percentRain = {sexta.rain}
+              tempMax={sexta.max}
+              tempMin={sexta.min}
+              />
+
+            <DayWeek 
+              weekday={sabado.day == today ? "Hoje": "Sábado"} 
+              percentRain = {sabado.rain}
+              tempMax={sabado.max}
+              tempMin={sabado.min}
+              />
+            
+            <DayWeek 
+              weekday={domingo.day == today ? "Hoje": "Domingo"} 
+              percentRain = {domingo.rain}
+              tempMax={domingo.max}
+              tempMin={domingo.min}
+              /> 
+          </View>
+          
         </View>
         </ScrollView>
         </LinearGradient>
