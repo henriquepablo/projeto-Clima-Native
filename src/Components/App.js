@@ -7,7 +7,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image, View } from "react-native";
 
-const Tab = createBottomTabNavigator();
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+const Tab = createMaterialTopTabNavigator();
 
 const App = () =>{
 
@@ -32,8 +34,8 @@ const App = () =>{
                 tabBarIcon: ({color, size, focused}) => {
                   if (focused) {
                     return (
-                      <View style={{backgroundColor: '#000', height: 51, width: '100%', justifyContent: 'center', alignItems: 'center', borderRadius: 6}}>
-                        <Image source={require('../img/iconeClima.png')} style={{tintColor: '#fff', padding: 10}}/>
+                      <View style={{justifyContent: 'center', alignItems: 'center', borderRadius: 6}}>
+                        <Image source={require('../img/iconeClima.png')} style={{tintColor: '#000', padding: 10}}/>
                       </View>
                     );
                   }
@@ -48,16 +50,14 @@ const App = () =>{
               tabBarIcon: ({color, size, focused}) => {
                 if (focused) {
                   return (
-                    <View style={{backgroundColor: '#000', height: 51, width: '100%', justifyContent: 'center', alignItems: 'center', borderRadius: 6}}>
-                      <Image source={require('../img/jornal-dobrado.png')} style={{tintColor: '#fff', padding: 10}}/>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 6}}>
+                      <Image source={require('../img/jornal-dobrado.png')} style={{tintColor: '#000', padding: 10}}/>
                     </View>
                   );
                   
                 }
                 return <Image source={require('../img/jornal-dobrado.png')} style={{tintColor: '#000', padding: 10}}/>
               },
-              tabBarBadge: 50,
-              tabBarBadgeStyle: {backgroundColor: '#000'}
             }}  
           />
 
